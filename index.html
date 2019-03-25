@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--<link rel="stylesheet" type="text/css" href="./assets/css/style.css">-->
+        <style>
+            button,
+            div,
+            form,
+            input {
+                margin: 10px;
+            }
+            .button-section {
+                padding: 25px 0 25px 0;
+                background-color:cornflowerblue;
+                border-radius: 6px;
+            }
+            .add-button-section {
+                padding: 25px;
+                background-color: rgb(154, 181, 231);
+                border-radius: 6px;
+            }
+            .output-section {
+                padding: 25px;
+                background-color:rgb(200, 208, 223);
+                border-radius: 6px;
+            }
+        </style>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="./assets/javascript/javascript.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 button-section">
+                    <div id="buttons-view"></div>
+                    <div id="new-buttons-view"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 add-button-section">
+                    <form>
+                        <div class="form-group" id="input-form">
+                            <label>Add an emotion</label>
+                            <input type="text" class="form-control" id="emotion-input" placeholder="Add an emotion">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+                    </form>
+                </div>
+                <div class="col-lg-8 card output-section">
+                    <div class="card-body d-flex flex-wrap justify-content-center" id="gif-output"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
