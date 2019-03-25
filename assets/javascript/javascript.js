@@ -1,6 +1,6 @@
 $(document).ready( function () {
 
-// Initial array of movies
+// Initial array of emotions
 var emotions = [{Text: "Happy", emoji: 	0x1F600}, 
                 {Text: "Sad", emoji: 	0x1F641}, 
                 {Text: "Angry", emoji: 0x1F620}, 
@@ -25,10 +25,10 @@ function displayGiphyInfo() {
 
     var APIKey = "Ol5iUXwCBKWPanUd70oXQLBki4s7hzoU";
     var limit = "10";
-    // Constructing a queryURL using the animal name
+    // Constructing a queryURL using the emotion, api key and limit
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotion + "&api_key=" + APIKey + "&limit=" + limit;
 
-    // Creating an AJAX call for the specific movie button being clicked
+    // Creating an AJAX call for the specific emotion button (emoji) being clicked
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -63,7 +63,7 @@ function displayGiphyInfo() {
             emotionDiv.append(p);
             emotionDiv.append(emotionImage);
 
-            // Prependng the emotionDiv to the HTML page in the "#gifs-appear-here" div
+            // Prependng the emotionDiv to the HTML page in the "#gif-output" div
             $("#gif-output").prepend(emotionDiv);
         }
 
@@ -88,38 +88,40 @@ function displayGiphyInfo() {
 
 
 
-      // Function for displaying movie data
+      // Function for displaying buttons
       function renderButtons() {
 
-        // Deleting the movies prior to adding new movies
+        // Deleting the emotions prior to adding new emotions
         // (this is necessary otherwise you will have repeat buttons)
         $("#buttons-view").empty();
 
-        // Looping through the array of movies
+        // Looping through the array of emotions (its a rollercoster of emotion. ha ha)
         for (var i = 0; i < emotions.length; i++) {
 
-          // Then dynamicaly generating buttons for each movie in the array
-          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          // Then dynamicaly generating buttons for each emotion in the array
           var a = $("<button>");
-          // Adding a class of movie-btn to our button
+          // Adding a class of emotion-btn, btn, btn-outline-primary to our button
           a.addClass("emotion-btn btn btn-outline-primary");
           // Adding a data-attribute
           a.attr("data-name", emotions[i].Text);
-          // Providing the initial button text
+          // Providing the initial button text by converting the unicode values in each object in the array throught the string.fromcodepoint method
           a.text(String.fromCodePoint(emotions[i].emoji));
           // Adding the button to the buttons-view div
           $("#buttons-view").append(a);
         }
       }
 
+      //I know the newly created buttons should be in the same div of buttons that previously exist but to get the emojis to work for the prexisting button and not affect the newly created buttons I needed to used seperate functions to generate the new buttons
+      //This function generates any buttons created by the user through the input text
       function renderNewButtons() {
+        //empty out the new-buttons-view div
         $("#new-buttons-view").empty();
+        //for the all of the buttons added to the array after the original buttons were created will fall under this for loop (so every button created after the 16th button)
         for (var i = 16; i < emotions.length; i++) {
 
-            // Then dynamicaly generating buttons for each movie in the array
-            // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+            // Then dynamicaly generating buttons for each new button in the array
             var a = $("<button>");
-            // Adding a class of movie-btn to our button
+            // Adding a class of emotion-btn btn btn-outline-primary to our button (bootstrap buttons)
             a.addClass("emotion-btn btn btn-outline-primary");
             // Adding a data-attribute
             a.attr("data-name", emotions[i]);
@@ -130,16 +132,16 @@ function displayGiphyInfo() {
           }
       }
 
-   // This function handles events where a movie button is clicked
+   // This function handles events where an emotion button is clicked
    $("#submit-button").on("click", function(event) {
     event.preventDefault();
     // This line grabs the input from the textbox
     var emotion = $("#emotion-input").val().trim();
 
-    // Adding movie from the textbox to our array
+    // Adding emotion from the textbox to our array
     emotions.push(emotion);
 
-    // Calling renderButtons which handles the processing of our movie array
+    // Calling renderButtons which handles the processing of our emotion array
     renderNewButtons();
   });
 
